@@ -35,7 +35,7 @@ app.use(morgan('combined', {stream: accessLogStream}));
 app.use('/', routes);
 
 // Start the API
-app.listen(4000);
+app.listen(config.apiPort);
 console.log("API running on port " + config.apiPort);
 
 // Export API server for testing

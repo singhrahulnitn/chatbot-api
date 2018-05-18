@@ -3,27 +3,13 @@ const dialogflow = require('dialogflow');
 const intentsClient = new dialogflow.IntentsClient({
     keyFilename: 'FAQ-Agent-b4409a756b6a.json'
 });
-const contextsClient = new dialogflow.ContextsClient({
-    keyFilename: 'FAQ-Agent-b4409a756b6a.json'
-});
 
+const agentPath = 'projects/faq-agent-98ae1/agent';
 
 exports.addIntent = (req, res, next) => {
-
-    const outputContextsName =  {
-            name: contextsClient.contextPath(
-                req.body.projectId,
-                'abcd12345' /* sessionId */,
-                req.body.intent.outputContexts.name
-            )
-        }
-        console.log("Hello context",outputContextsName);
-
-    newIntent.intent.outputContexts.name = outputContextsName;
-
     const newIntent = {
-        parent: intentsClient.projectAgentPath(req.body.projectId),
-        intent: req.body.intent,
+        parent: agentPath,
+        intent: req.body,
     };
 
     intentsClient
@@ -57,18 +43,18 @@ exports.getIntents = (req, res, next) => {
 };
 
 exports.deleteIntent = (req, res, next) => {
-
-    const request = { name: req.body.name };
-
+    
+    const request = {name: req.body.name};
+    
     return intentsClient
-        .deleteIntent(request)
-        .then((res) => {
-            // console.log(`Intent deleted`);
-            res.json(res);
-        })
-        .catch(err => {
-            res.send(err);
-            // console.error(`Failed to delete intent ${intent.displayName}:`, err);s
-        });
+      .deleteIntent(request)
+      .then((res) => {
+        console.log(`Intent deleted`);
+        res.json(res);
+      })
+      .catch(err => {
+          res.send(err);
+        // console.error(`Failed to delete intent ${intent.displayName}:`, err);s
+      });
 
 }
