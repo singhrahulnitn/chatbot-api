@@ -15,6 +15,7 @@ router.post('/buggyroute', tasks.buggyRoute);
 router.post('/addIntent', dialogflowTasks.addIntent);
 router.get('/getIntents', dialogflowTasks.getIntents);
 router.post('/deleteIntent', dialogflowTasks.deleteIntent);
+router.post('/addEntity', dialogflowTasks.addEntity);
 
 // Error Handling
 let errors = require('./controllers/errors');

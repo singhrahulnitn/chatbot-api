@@ -1,9 +1,10 @@
 'use strict';
-
+var cors = require('cors');
 // API boilerplate
 let express = require('express');
 let app = express();
 let routes = require('./routes');
+app.use(cors());
 
 // Logging
 let bodyParser = require('body-parser');
